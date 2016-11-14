@@ -23,6 +23,7 @@ docker run -dt --name shadowsocks -p 5000:5000 mritd/shadowsocks -k mritd -w 2 -
 - `-f` : 启用 FAST_OPEN
 - `-i` : 启用 PREFER_IPV6
 - `-x` : 禁用 kcptun
+- ```-g``` : 使用/etc/shadowsocks.json作为配置文件；忽略其他与shadowsocks相关的选项。
 
 ### 具体选项含义如下
 
@@ -40,7 +41,7 @@ Proxy options:
   --forbidden-ip IPLIST  comma seperated IP list forbidden to connect
   --manager-address ADDR optional server manager UDP address, see wiki
   --prefer-ipv6          resolve ipv6 address first
-
+  -g SS_CONFIG_FLAG		 use /etc/shadowsokcs.json
 General options:
   -h, --help             show this help message and exit
   -d start/stop/restart  daemon mode
@@ -74,26 +75,26 @@ docker run -dt --name shadowsocks -p 5000:5000 -p 20000:20000 mritd/shadowsocks 
 
 14 号更新增加了对环境变量的支持，支持环境变量如下
 
-|环境变量|作用|取值|
-|-------|---|---|
-|SERVER_ADDR|服务器监听地址|IPV4(一般为 0.0.0.0)|
-|SERVER_PORT|服务器监听端口|0~65535|
-|PASSWORD|shadowsocks 密码|任意字符 默认 `ZQoPF2g6uwJE7cy4`|
-|METHOD|shadowsocks 加密方式|默认 aes-256-cfb|
-|TIMEOUT|shadowsocks 链接超时时间|默认 300|
-|WORKERS|shadowsocks 工作进程|默认 1|
-|ONE_TIME_AUTH|是否启用 0TA|为空或 `-a`|
-|FAST_OPEN|开启 fast-open|为空或 `--fast-open`|
-|PREFER_IPV6|优先处理 IPV6|为空或 `--prefer-ipv6`|
-|KCPTUN_FLAG|是否开启 kcptun 支持|`true` 或 `false`|
-|KCPTUN_CONFIG|自定义 kcptun 配置|压缩并转义后的 kcptun 配置|
+| 环境变量           | 作用                 | 取值                         |
+| -------------- | ------------------ | -------------------------- |
+| SERVER_ADDR    | 服务器监听地址            | IPV4(一般为 0.0.0.0)          |
+| SERVER_PORT    | 服务器监听端口            | 0~65535                    |
+| PASSWORD       | shadowsocks 密码     | 任意字符 默认 `ZQoPF2g6uwJE7cy4` |
+| METHOD         | shadowsocks 加密方式   | 默认 aes-256-cfb             |
+| TIMEOUT        | shadowsocks 链接超时时间 | 默认 300                     |
+| WORKERS        | shadowsocks 工作进程   | 默认 1                       |
+| ONE_TIME_AUTH  | 是否启用 0TA           | 为空或 `-a`                   |
+| FAST_OPEN      | 开启 fast-open       | 为空或 `--fast-open`          |
+| PREFER_IPV6    | 优先处理 IPV6          | 为空或 `--prefer-ipv6`        |
+| KCPTUN_FLAG    | 是否开启 kcptun 支持     | `true` 或 `false`           |
+| KCPTUN_CONFIG  | 自定义 kcptun 配置      | 压缩并转义后的 kcptun 配置          |
+| SS_CONFIG_FLAG | 是否使用配置文件           | `true` 或 `false`           |
 
 使用时可指定环境变量，如下
 
 ``` sh
 docker run -dt --name shadowsocks -p 5000:5000 -e PASSWORD=ZQoPF2g6uwJE7cy4 -e FAST_OPEN=-a mritd/shadowsocks
 ```
-
 
 ### 更新日志
 

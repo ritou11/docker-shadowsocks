@@ -11,8 +11,9 @@ WORKERS=${WORKERS:-1}
 PREFER_IPV6=${PREFER_IPV6:-""}
 KCPTUN_FLAG=${KCPTUN_FLAG:-"true"}
 KCPTUN_CONFIG=${KCPTUN_CONFIG:-""}
+SS_CONFIG_FLAG=${SS_CONFIG_FLAG:-"false"}
 
-while getopts "s:p:k:m:t:w:c:afx" OPT; do
+while getopts "s:p:k:m:t:w:c:afxg" OPT; do
   case $OPT in
     s)
         SERVER_ADDR=$OPTARG;;
@@ -36,7 +37,8 @@ while getopts "s:p:k:m:t:w:c:afx" OPT; do
         PREFER_IPV6="--prefer-ipv6";;
     x)
         KCPTUN_FLAG="false";;
-
+    g)
+        SS_CONFIG_FLAG="true";;
   esac
 done
 
@@ -52,5 +54,11 @@ else
 fi
 
 echo -e "\033[32mStarting shadowsocks......\033[0m"
-/usr/bin/ssserver -s $SERVER_ADDR -p $SERVER_PORT -k "$PASSWORD" -m $METHOD -t $TIMEOUT \
+
+if [ $SS_CONFIG_FLAG == "true" ]; then
+    echo -e "\033[32mReading shadowsocks configuration.....\033[0m"
+    /usr/bin/ssserver -c /etc/shadowsocks.json
+else
+    /usr/bin/ssserver -s $SERVER_ADDR -p $SERVER_PORT -k "$PASSWORD" -m $METHOD -t $TIMEOUT \
                   --workers $WORKERS $ONE_TIME_AUTH $FAST_OPEN $PREFER_IPV6
+fi
