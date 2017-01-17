@@ -2,8 +2,8 @@
 
 [![](https://images.microbadger.com/badges/version/ritou11/docker-shadowsocks.svg)](https://microbadger.com/images/ritou11/docker-shadowsocks "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/ritou11/docker-shadowsocks.svg)](https://microbadger.com/images/ritou11/docker-shadowsocks "Get your own image badge on microbadger.com")
 
-- **shadowsocks 版本: 2.9.0**
-- **kcptun 版本: 20161111**
+- **shadowsocks 版本: 2.9.1**
+- **kcptun 版本: 20161222**
 
 ### 打开姿势
 
@@ -151,3 +151,5 @@ docker run -dt --name shadowsocks -p 20000:20000/udp -p 9042:9042 -p 9041:9041 -
 - 2016-11-14 手工fork
 
   将代码从[mritd的docker库](https://github.com/mritd/docker)中剥离，增加了-g选项，增加了典型配置。
+
+- 2017-01-17 更新了Alpine和Shadowsocks的版本
