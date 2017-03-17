@@ -28,7 +28,7 @@ RUN apk upgrade --no-cache \
     rm -rf /var/cache/apk/*
 
 ADD entrypoint.sh /root/entrypoint.sh
-
+RUN chmod +x /root/entrypoint.sh
 ADD kcptun.cfg /etc/kcptun.cfg
 
 ENTRYPOINT ["/root/entrypoint.sh"]
