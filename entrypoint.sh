@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SERVER_ADDR=${SERVER_ADDR:-0.0.0.0}
 SERVER_PORT=${SERVER_PORT:-5000}
